@@ -1,1 +1,15 @@
-{"age": 21}
+{
+    "name": "Olivia",
+    "age": 21,
+    "size": 1.55,
+    "hobbies": [
+        "drawing",
+        "singing"
+    ],
+    "address": {
+        "city": "cologne",
+        "zip": 50825,
+        "street": "Groelmanstraße",
+        "number": 22
+    }
+}

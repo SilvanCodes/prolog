@@ -10,7 +10,6 @@ activity(i, 7, [f,g], 600).
 activity(j, 3, [h,i], 600).
 activity(k, 1, [j], 600).
 
-
 vkn :- write_vkn.
 
 write_vkn :-
@@ -26,14 +25,22 @@ write_vkn :-
     fail.
 write_vkn.
 
-critical_path([]) :-
-    activity(A, _, _, _),
-    buffer(A, 0/(0)).
+% fails to correctly display parallel path
+critical_path :-
+   activity(A, _, _, _),
+   buffer(A, 0/(0)),
+   write(A),
+   write(' -> '),
+   fail.
+critical_path :-
+    write('done.'),
+    nl.
 
 respond([]) :-
     nl.
 respond([H|T]) :-
     write(H),
+    tab(1),
     respond(T).
 
 desc(A, (FA/FE)/(SA/SE), TB/FB) :-

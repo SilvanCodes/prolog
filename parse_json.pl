@@ -3,8 +3,10 @@
 main :-
     phrase_from_file(object, 'test.json').
 
-% object --> curly_paren_open, kv, blanks, ",", blanks, kv, curly_paren_close.
-object --> curly_paren_open, kv, curly_paren_close.
+object -->
+    curly_paren_open,
+    kvs,
+    curly_paren_close.
 
 curly_paren_open -->
    blanks,
@@ -19,38 +21,77 @@ curly_paren_close -->
     blanks.
 
 kvs -->
+    [].
+kvs -->
+    kv.
+kvs -->
     kv,
-    !,
     blanks,
     ",",
     !,
     blanks,
-    kv,
-    !.
-% kvs --> kv.
-% kvs --> [].
+    kvs.
 
 kv -->
-    "\"",
-    alnums,
-    "\"",
+    key,
     blanks,
     ":",
     blanks,
-    "\"",
-    floats,
-    "\"",
-    !.
+    value.
 
-floats -->
-    [X],
-    { float(X) }.
+key -->
+    string.
+
 value -->
-    alnums.
+    string.
+value -->
+    digits.
+value -->
+    float.
+value -->
+    list.
+value -->
+    object.
 
+values -->
+    [].
+values -->
+    value.
+values -->
+    value,
+    blanks,
+    ",",
+    blanks,
+    values.
+
+list -->
+    "[",
+    blanks,
+    values,
+    blanks,
+    "]".
+
+string -->
+    "\"",
+    alnums,
+    "\"".
+
+float -->
+    digits,
+    ".",
+    digits. 
+
+alnums -->
+    [].
 alnums -->
     [X],
     alnums,
     { is_alnum(X) }.
-alnums -->
-    [].
+
+digits -->
+    [X|[]],
+    { is_digit(X) }.
+digits -->
+    [X],
+    digits,
+    { is_digit(X) }.

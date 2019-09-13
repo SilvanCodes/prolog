@@ -7,7 +7,6 @@ my_last([H|[]], H).
 my_last([_|T], E) :-
     my_last(T, E).
 
-
 my_split([H|T], [H], T, H).
 my_split([H|T], [H|L1], L2, E) :-
     my_split(T, L1, L2, E).
