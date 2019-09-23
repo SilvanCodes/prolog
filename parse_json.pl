@@ -43,6 +43,8 @@ key -->
     string.
 
 value -->
+    boolean.
+value -->
     string.
 value -->
     digits.
@@ -63,6 +65,10 @@ values -->
     ",",
     blanks,
     values.
+
+boolean -->
+    "true";
+    "false".
 
 list -->
     "[",
